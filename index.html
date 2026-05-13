@@ -4,48 +4,69 @@
   <title>Dad Maths</title>
 
   <style>
-    body {
-      font-family: Comic Sans MS;
-      text-align: center;
-      padding: 40px;
-      background: #f5f5f5;
-    }
+  body {
+    font-family: Comic Sans MS;
+    text-align: center;
+    padding: 30px;
+    background: #f0f4f8;
+  }
 
-    .card {
-      background: white;
-      padding: 30px;
-      border-radius: 15px;
-      max-width: 400px;
-      margin: auto;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
+  h1 {
+    color: #2c3e50;
+  }
 
-    h1 {
-      color: #2c3e50;
-    }
+  .card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 400px;
+    margin: auto;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
 
-    input {
-      font-size: 20px;
-      padding: 10px;
-      width: 80%;
-      margin-top: 10px;
-    }
+  #level {
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
 
-    button {
-      font-size: 18px;
-      padding: 10px 20px;
-      margin-top: 10px;
-      border: none;
-      background: #3498db;
-      color: white;
-      border-radius: 10px;
-    }
+  .bronze {
+    background: #cd7f32;
+  }
 
-    #feedback {
-      margin-top: 15px;
-      font-size: 18px;
-    }
-  </style>
+  .silver {
+    background: #95a5a6;
+  }
+
+  .gold {
+    background: #f1c40f;
+    color: black;
+  }
+
+  input {
+    font-size: 20px;
+    padding: 10px;
+    width: 80%;
+    margin-top: 10px;
+  }
+
+  button {
+    font-size: 18px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    background: #3498db;
+    color: white;
+    border-radius: 10px;
+  }
+
+  #feedback {
+    margin-top: 15px;
+    font-size: 18px;
+  }
+</style>
 </head>
 
 <body>
@@ -96,21 +117,26 @@
           currentIndex++;
 
           if (currentIndex < questions.length) {
-            loadQuestion();
-          } else {
-            document.getElementById("question").innerText = "🎉 All done!";
-            document.getElementById("level").innerText = "Champion!";
-            document.getElementById("feedback").innerText = "";
-          }
-        }, 1000);
+           function loadQuestion() {
+  const current = questions[currentIndex];
 
-      } else {
-        document.getElementById("feedback").innerText = "❌ Try again 👀";
-      }
-    }
+  const levelEl = document.getElementById("level");
+  levelEl.innerText = current.level;
 
-    // Start app
-    loadQuestion();
+  levelEl.className = "";
+
+  if (current.level.includes("Bronze")) {
+    levelEl.classList.add("bronze");
+  } else if (current.level.includes("Silver")) {
+    levelEl.classList.add("silver");
+  } else {
+    levelEl.classList.add("gold");
+  }
+
+  document.getElementById("question").innerText = current.q;
+  document.getElementById("answer").value = "";
+  document.getElementById("feedback").innerText = "";
+}
   </script>
 
 </body>
