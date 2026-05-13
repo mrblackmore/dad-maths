@@ -1,52 +1,117 @@
-<script>
-  const questions = [
-    // Bronze
-    { q: "45 + 23", a: 68, level: "🟤 Bronze" },
-    { q: "67 - 21", a: 46, level: "🟤 Bronze" },
-    { q: "80 + 15", a: 95, level: "🟤 Bronze" },
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dad Maths</title>
 
-    // Silver
-    { q: "346 + 278", a: 624, level: "⚪ Silver" },
-    { q: "512 - 189", a: 323, level: "⚪ Silver" },
-
-    // Gold
-    { q: "245 + 378 - 129", a: 494, level: "🟡 Gold" }
-  ];
-
-  let currentIndex = 0;
-
-  function loadQuestion() {
-    const current = questions[currentIndex];
-    document.getElementById("question").innerText = current.q;
-    document.getElementById("level").innerText = current.level;
-    document.getElementById("answer").value = "";
-    document.getElementById("feedback").innerText = "";
-  }
-
-  function check() {
-    const input = parseInt(document.getElementById("answer").value);
-    const correct = questions[currentIndex].a;
-
-    if (input === correct) {
-      document.getElementById("feedback").innerText = "✅ Nice one Lauren!";
-      
-      setTimeout(() => {
-        currentIndex++;
-
-        if (currentIndex < questions.length) {
-          loadQuestion();
-        } else {
-          document.getElementById("question").innerText = "🎉 All done!";
-          document.getElementById("level").innerText = "Champion!";
-          document.getElementById("feedback").innerText = "";
-        }
-      }, 1000);
-
-    } else {
-      document.getElementById("feedback").innerText = "❌ Try again 👀";
+  <style>
+    body {
+      font-family: Comic Sans MS;
+      text-align: center;
+      padding: 40px;
+      background: #f5f5f5;
     }
-  }
 
-  // Load first question
-  loadQuestion();
-</script>
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 400px;
+      margin: auto;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      color: #2c3e50;
+    }
+
+    input {
+      font-size: 20px;
+      padding: 10px;
+      width: 80%;
+      margin-top: 10px;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin-top: 10px;
+      border: none;
+      background: #3498db;
+      color: white;
+      border-radius: 10px;
+    }
+
+    #feedback {
+      margin-top: 15px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Dad Maths</h1>
+
+  <div class="card">
+    <h2 id="level"></h2>
+    <p id="question"></p>
+
+    <input id="answer" placeholder="Your answer" />
+    <br>
+    <button onclick="checkAnswer()">Check</button>
+
+    <p id="feedback"></p>
+  </div>
+
+  <script>
+    const questions = [
+      { q: "45 + 23", a: 68, level: "🟤 Bronze" },
+      { q: "67 - 21", a: 46, level: "🟤 Bronze" },
+      { q: "80 + 15", a: 95, level: "🟤 Bronze" },
+
+      { q: "346 + 278", a: 624, level: "⚪ Silver" },
+      { q: "512 - 189", a: 323, level: "⚪ Silver" },
+
+      { q: "245 + 378 - 129", a: 494, level: "🟡 Gold" }
+    ];
+
+    let currentIndex = 0;
+
+    function loadQuestion() {
+      const current = questions[currentIndex];
+      document.getElementById("question").innerText = current.q;
+      document.getElementById("level").innerText = current.level;
+      document.getElementById("answer").value = "";
+      document.getElementById("feedback").innerText = "";
+    }
+
+    function checkAnswer() {
+      const input = parseInt(document.getElementById("answer").value);
+      const correct = questions[currentIndex].a;
+
+      if (input === correct) {
+        document.getElementById("feedback").innerText = "✅ Nice one Lauren!";
+
+        setTimeout(() => {
+          currentIndex++;
+
+          if (currentIndex < questions.length) {
+            loadQuestion();
+          } else {
+            document.getElementById("question").innerText = "🎉 All done!";
+            document.getElementById("level").innerText = "Champion!";
+            document.getElementById("feedback").innerText = "";
+          }
+        }, 1000);
+
+      } else {
+        document.getElementById("feedback").innerText = "❌ Try again 👀";
+      }
+    }
+
+    // Start app
+    loadQuestion();
+  </script>
+
+</body>
+</html>
